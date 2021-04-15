@@ -1,5 +1,6 @@
 package controller;
 
+import connection.ConnectionClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,10 +12,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import model.Availability;
 import model.Employee;
-import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -139,35 +143,51 @@ public class AvailabilityController implements Initializable {
     }
 
     @FXML
-    void select(ActionEvent event) {
+    void select(ActionEvent event) throws SQLException {
         LocalDate date = datePicker.getValue();
-        int i = 1;
-        while(i < 8) {
-            String finaldate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            if(i == 1) {
-                date1.setText(finaldate);
-                selectedDate1 = finaldate;
-            } else if(i == 2) {
-                date2.setText(finaldate);
-                selectedDate2 = finaldate;
-            } else if(i == 3) {
-                date3.setText(finaldate);
-                selectedDate3 = finaldate;
-            } else if(i == 4) {
-                date4.setText(finaldate);
-                selectedDate4 = finaldate;
-            } else if(i == 5) {
-                date5.setText(finaldate);
-                selectedDate5 = finaldate;
-            } else if(i == 6) {
-                date6.setText(finaldate);
-                selectedDate6 = finaldate;
-            } else {
-                date7.setText(finaldate);
-                selectedDate7 = finaldate;
+
+        ConnectionClass connectionclass = new ConnectionClass();
+        Connection connection = connectionclass.getConnection();
+
+        String sql = "SELECT `date` FROM `availability` WHERE `email` = '" + activeUser.getEmail() + "' AND  `date` = '" + date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "'";
+        ResultSet rst;
+
+        Statement statement = connection.createStatement();
+        rst = statement.executeQuery(sql);
+
+        if(!rst.next()) {
+            showFields();
+
+            int i = 1;
+            while (i < 8) {
+                String finaldate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                if (i == 1) {
+                    date1.setText(finaldate);
+                    selectedDate1 = finaldate;
+                } else if (i == 2) {
+                    date2.setText(finaldate);
+                    selectedDate2 = finaldate;
+                } else if (i == 3) {
+                    date3.setText(finaldate);
+                    selectedDate3 = finaldate;
+                } else if (i == 4) {
+                    date4.setText(finaldate);
+                    selectedDate4 = finaldate;
+                } else if (i == 5) {
+                    date5.setText(finaldate);
+                    selectedDate5 = finaldate;
+                } else if (i == 6) {
+                    date6.setText(finaldate);
+                    selectedDate6 = finaldate;
+                } else {
+                    date7.setText(finaldate);
+                    selectedDate7 = finaldate;
+                }
+                date = date.plusDays(1);
+                i++;
             }
-            date = date.plusDays(1);
-            i++;
+        } else {
+            updateScreen();
         }
     }
 
@@ -258,13 +278,29 @@ public class AvailabilityController implements Initializable {
             endTime7 = Double.parseDouble(et7.getText().substring(0, 2));
         }
 
-        activeUser.addAvailability(new Availability(selectedDate1, beginTime1, endTime1));
-        activeUser.addAvailability(new Availability(selectedDate2, beginTime2, endTime2));
-        activeUser.addAvailability(new Availability(selectedDate3, beginTime3, endTime3));
-        activeUser.addAvailability(new Availability(selectedDate4, beginTime4, endTime4));
-        activeUser.addAvailability(new Availability(selectedDate5, beginTime5, endTime5));
-        activeUser.addAvailability(new Availability(selectedDate6, beginTime6, endTime6));
-        activeUser.addAvailability(new Availability(selectedDate7, beginTime7, endTime7));
+        ConnectionClass connectionclass = new ConnectionClass();
+        Connection connection = connectionclass.getConnection();
+
+        String sql1 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate1 + "','" + beginTime1 + "','" + endTime1 + "')";
+        String sql2 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate2 + "','" + beginTime2 + "','" + endTime2 + "')";
+        String sql3 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate3 + "','" + beginTime3 + "','" + endTime3 + "')";
+        String sql4 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate4 + "','" + beginTime4 + "','" + endTime4 + "')";
+        String sql5 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate5 + "','" + beginTime5 + "','" + endTime5 + "')";
+        String sql6 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate6 + "','" + beginTime6 + "','" + endTime6 + "')";
+        String sql7 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate7 + "','" + beginTime7 + "','" + endTime7 + "')";
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.execute(sql1);
+            statement.execute(sql2);
+            statement.execute(sql3);
+            statement.execute(sql4);
+            statement.execute(sql5);
+            statement.execute(sql6);
+            statement.execute(sql7);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Dashboard.fxml"));
         AnchorPane root = loader.load();
@@ -287,8 +323,48 @@ public class AvailabilityController implements Initializable {
         rootPane.getChildren().setAll(root);
     }
 
+    public void updateScreen() {
+        date1.setText("This date has already been filled in!");
+        hideFields();
+    }
+
+    public void hideFields() {
+        bt1.setVisible(false);
+        bt2.setVisible(false);
+        bt3.setVisible(false);
+        bt4.setVisible(false);
+        bt5.setVisible(false);
+        bt6.setVisible(false);
+        bt7.setVisible(false);
+        et1.setVisible(false);
+        et2.setVisible(false);
+        et3.setVisible(false);
+        et4.setVisible(false);
+        et5.setVisible(false);
+        et6.setVisible(false);
+        et7.setVisible(false);
+    }
+
+    public void showFields() {
+        bt1.setVisible(true);
+        bt2.setVisible(true);
+        bt3.setVisible(true);
+        bt4.setVisible(true);
+        bt5.setVisible(true);
+        bt6.setVisible(true);
+        bt7.setVisible(true);
+        et1.setVisible(true);
+        et2.setVisible(true);
+        et3.setVisible(true);
+        et4.setVisible(true);
+        et5.setVisible(true);
+        et6.setVisible(true);
+        et7.setVisible(true);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         breadCrumb.setText("Availability");
+        hideFields();
     }
 }

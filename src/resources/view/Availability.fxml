@@ -11,7 +11,7 @@
 <AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AvailabilityController">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="50.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
-        <Text fx:id="date1" layoutX="20.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE">
+        <Text fx:id="date1" layoutX="20.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0">
             <font>
                 <Font name="Consolas" size="16.0" />
             </font></Text>
@@ -26,42 +26,42 @@
       </Text>
       <Button fx:id="save" layoutX="280.0" layoutY="355.0" mnemonicParsing="false" onAction="#save" text="Save" />
       <Button fx:id="select" layoutX="197.0" layoutY="85.0" mnemonicParsing="false" onAction="#select" text="Select" />
-      <Text fx:id="date2" layoutX="20.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE">
+      <Text fx:id="date2" layoutX="20.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Consolas" size="16.0" />
          </font>
       </Text>
       <TextField fx:id="bt2" layoutX="146.0" layoutY="153.0" promptText="begin time" />
       <TextField fx:id="et2" layoutX="306.0" layoutY="153.0" promptText="end time" />
-      <Text fx:id="date3" layoutX="20.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE">
+      <Text fx:id="date3" layoutX="20.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Consolas" size="16.0" />
          </font>
       </Text>
       <TextField fx:id="bt3" layoutX="146.0" layoutY="185.0" promptText="begin time" />
       <TextField fx:id="et3" layoutX="306.0" layoutY="185.0" promptText="end time" />
-      <Text fx:id="date4" layoutX="20.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE">
+      <Text fx:id="date4" layoutX="20.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Consolas" size="16.0" />
          </font>
       </Text>
       <TextField fx:id="bt4" layoutX="146.0" layoutY="217.0" promptText="begin time" />
       <TextField fx:id="et4" layoutX="306.0" layoutY="217.0" promptText="end time" />
-      <Text fx:id="date5" layoutX="20.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE">
+      <Text fx:id="date5" layoutX="20.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Consolas" size="16.0" />
          </font>
       </Text>
       <TextField fx:id="bt5" layoutX="146.0" layoutY="249.0" promptText="begin time" />
       <TextField fx:id="et5" layoutX="306.0" layoutY="249.0" promptText="end time" />
-      <Text fx:id="date6" layoutX="20.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE">
+      <Text fx:id="date6" layoutX="20.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Consolas" size="16.0" />
          </font>
       </Text>
       <TextField fx:id="bt6" layoutX="146.0" layoutY="281.0" promptText="begin time" />
       <TextField fx:id="et6" layoutX="306.0" layoutY="281.0" promptText="end time" />
-      <Text fx:id="date7" layoutX="20.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE">
+      <Text fx:id="date7" layoutX="20.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Consolas" size="16.0" />
          </font>
@@ -71,5 +71,6 @@
       <Text layoutX="14.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select a MONDAY in the datepicker and fill out the entire week." />
       <Button fx:id="getAvailability" layoutX="198.0" layoutY="13.0" mnemonicParsing="false" onAction="#getAvailability" text="Get Availability" />
       <Text layoutX="270.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please use the following format for the time. (ex: 10:00 or 15:30)" wrappingWidth="184.6640625" />
+      <Text layoutX="470.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Availability will only be saved if every field has been filled in!" wrappingWidth="105.5625" />
     </children>
 </AnchorPane>
