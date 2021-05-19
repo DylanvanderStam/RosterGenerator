@@ -36,7 +36,7 @@ public class Employee extends User {
         rst = statement.executeQuery(sql);
 
         while(rst.next()) {
-            availability.add(new Availability(rst.getString(2), rst.getDouble(3), rst.getDouble(4)));
+            addAvailability(new Availability(rst.getString(2), rst.getDouble(3), rst.getDouble(4)));
         }
     }
 
