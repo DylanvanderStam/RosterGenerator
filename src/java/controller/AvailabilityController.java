@@ -46,6 +46,9 @@ public class AvailabilityController implements Initializable {
     private Double endTime5;
     private Double endTime6;
     private Double endTime7;
+    private static String date1Check;
+    private static String date2Check;
+    private static String date3Check;
 
     @FXML
     private AnchorPane rootPane;
@@ -310,6 +313,36 @@ public class AvailabilityController implements Initializable {
         dashboardController.initData(activeUser);
 
         rootPane.getChildren().setAll(root);
+    }
+
+    public static boolean checkAvailability(LocalDate date, Double beginTime, Double endTime, Boolean filledIN, Employee email) throws SQLException {
+        ConnectionClass connectionclass = new ConnectionClass();
+        Connection connection = connectionclass.getConnection();
+
+        String sql = "SELECT `date` FROM `availability` WHERE `email` = '" + email.getEmail() + "' AND  `date` = '" + date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "'";
+        ResultSet rst;
+
+        Statement statement = connection.createStatement();
+        rst = statement.executeQuery(sql);
+
+        String finaldate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        if(!rst.next()) {
+            int i = 1;
+            while (i < 4) {
+                if (i == 1) {
+                    date1Check = finaldate;
+                } else if (i == 2) {
+                    date2Check = finaldate;
+                } else if (i == 3) {
+                    date3Check = finaldate;
+                }
+                date = date.plusDays(1);
+                i++;
+            }
+        }
+
+        return (date1Check.equals(finaldate) || date2Check.equals(finaldate) || date3Check.equals(finaldate))  && !filledIN && endTime - beginTime == 9.0;
     }
 
     @FXML

@@ -53,8 +53,14 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    void account(ActionEvent event) {
+    void account(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Account.fxml"));
+        AnchorPane root = loader.load();
 
+        AccountController accountController = loader.getController();
+        accountController.initData(activeUser);
+
+        rootPane.getChildren().setAll(root);
     }
 
     @FXML

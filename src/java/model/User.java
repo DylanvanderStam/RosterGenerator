@@ -19,6 +19,10 @@ public class User {
         return this.firstName;
     }
 
+    public String getName() {
+        return this.firstName + " " + this.lastName;
+    }
+
     public String getEmail() {
         return this.email;
     }
