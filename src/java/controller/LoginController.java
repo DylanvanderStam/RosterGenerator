@@ -5,10 +5,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import model.Company;
-import model.Employee;
+import company.Company;
+import user.Login;
+import user.User;
+import notification.LoginError;
+import notification.LoginSucces;
+import notification.Notification;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,7 +21,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
-    ArrayList<Employee> employees;
+    ArrayList<User> employees;
+    private User activeUser;
 
     @FXML
     private AnchorPane rootPane;
@@ -31,17 +37,26 @@ public class LoginController implements Initializable {
     private Button loginButton;
 
     @FXML
+    private Label notification;
+
+    @FXML
     void login(ActionEvent event) throws IOException {
-        for(Employee temp : employees) {
-            if (temp.getEmail().equals(email.getText()) && temp.getPassword().equals(password.getText())) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Dashboard.fxml"));
-                AnchorPane root = loader.load();
+        Login login = Login.getInstance(email.getText(), password.getText(), employees);
+        if(login != null) {
+            Notification not = new LoginSucces();
+            not.notification(notification);
 
-                DashboardController dashboardController = loader.getController();
-                dashboardController.initData(temp);
+            activeUser = login.getActiveUser();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Dashboard.fxml"));
+            AnchorPane root = loader.load();
 
-                rootPane.getChildren().setAll(root);
-            }
+            DashboardController dashboardController = loader.getController();
+            dashboardController.initData(activeUser);
+
+            rootPane.getChildren().setAll(root);
+        } else {
+            Notification not = new LoginError();
+            not.notification(notification);
         }
     }
 

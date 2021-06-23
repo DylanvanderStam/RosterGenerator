@@ -1,4 +1,4 @@
-package model;
+package user;
 
 import connection.ConnectionClass;
 
@@ -8,17 +8,43 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Employee extends User {
+public class User {
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
+    private String password;
     private ArrayList<Availability> availability;
 
-    public Employee(String firstName, String lastName, String email, String phoneNumber, String password) {
-        super(firstName, lastName, email, phoneNumber, password);
+    User(String firstName, String lastName, String email, String phoneNumber, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
         availability = new ArrayList<>();
+
         try {
             getData();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getName() {
+        return this.firstName + " " + this.lastName;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 
     public void addAvailability(Availability availability) {

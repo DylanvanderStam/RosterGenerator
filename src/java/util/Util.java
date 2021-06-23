@@ -8,6 +8,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Util {
+    private Util() {
+
+    }
+
     public static Paint checkTime() {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         LocalTime time = LocalTime.parse(date);

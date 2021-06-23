@@ -1,4 +1,4 @@
-package model;
+package user;
 
 public class Administrator extends User {
     public Administrator(String firstName, String lastName, String email, String phoneNumber, String password) {

@@ -10,8 +10,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import model.Availability;
-import model.Employee;
+import user.Employee;
+import user.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +24,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class AvailabilityController implements Initializable {
-    private Employee activeUser;
+    private User activeUser;
     private String selectedDate1;
     private String selectedDate2;
     private String selectedDate3;
@@ -32,23 +32,10 @@ public class AvailabilityController implements Initializable {
     private String selectedDate5;
     private String selectedDate6;
     private String selectedDate7;
-    private Double beginTime1;
-    private Double beginTime2;
-    private Double beginTime3;
-    private Double beginTime4;
-    private Double beginTime5;
-    private Double beginTime6;
-    private Double beginTime7;
-    private Double endTime1;
-    private Double endTime2;
-    private Double endTime3;
-    private Double endTime4;
-    private Double endTime5;
-    private Double endTime6;
-    private Double endTime7;
     private static String date1Check;
     private static String date2Check;
     private static String date3Check;
+    private static String dateFormat = "dd/MM/yyyy";
 
     @FXML
     private AnchorPane rootPane;
@@ -134,15 +121,13 @@ public class AvailabilityController implements Initializable {
     @FXML
     private Button select;
 
-    public void initData(Employee user) {
+    public void initData(User user) {
         activeUser = user;
     }
 
     @FXML
     void getAvailability(ActionEvent event) {
-        for(Availability temp : activeUser.getAvailability()) {
-            System.out.println(temp.getDate() + " " + temp.getBeginTime() + " " + temp.getEndTime());
-        }
+        //To be implemented
     }
 
     @FXML
@@ -152,7 +137,7 @@ public class AvailabilityController implements Initializable {
         ConnectionClass connectionclass = new ConnectionClass();
         Connection connection = connectionclass.getConnection();
 
-        String sql = "SELECT `date` FROM `availability` WHERE `email` = '" + activeUser.getEmail() + "' AND  `date` = '" + date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "'";
+        String sql = "SELECT `date` FROM `availability` WHERE `email` = '" + activeUser.getEmail() + "' AND  `date` = '" + date.format(DateTimeFormatter.ofPattern(dateFormat)) + "'";
         ResultSet rst;
 
         Statement statement = connection.createStatement();
@@ -163,7 +148,7 @@ public class AvailabilityController implements Initializable {
 
             int i = 1;
             while (i < 8) {
-                String finaldate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                String finaldate = date.format(DateTimeFormatter.ofPattern(dateFormat));
                 if (i == 1) {
                     date1.setText(finaldate);
                     selectedDate1 = finaldate;
@@ -196,42 +181,49 @@ public class AvailabilityController implements Initializable {
 
     @FXML
     void save(ActionEvent event) throws IOException {
+        Double beginTime1;
         if(bt1.getText().contains(":30")) {
             beginTime1 = Double.parseDouble(bt1.getText().substring(0, 2) + ".5");
         } else {
             beginTime1 = Double.parseDouble(bt1.getText().substring(0, 2));
         }
 
+        Double beginTime2;
         if(bt2.getText().contains(":30")) {
             beginTime2 = Double.parseDouble(bt2.getText().substring(0, 2) + ".5");
         } else {
             beginTime2 = Double.parseDouble(bt2.getText().substring(0, 2));
         }
 
+        Double beginTime3;
         if(bt3.getText().contains(":30")) {
             beginTime3 = Double.parseDouble(bt3.getText().substring(0, 2) + ".5");
         } else {
             beginTime3 = Double.parseDouble(bt3.getText().substring(0, 2));
         }
 
+        Double beginTime4;
         if(bt4.getText().contains(":30")) {
             beginTime4 = Double.parseDouble(bt4.getText().substring(0, 2) + ".5");
         } else {
             beginTime4 = Double.parseDouble(bt4.getText().substring(0, 2));
         }
 
+        Double beginTime5;
         if(bt5.getText().contains(":30")) {
             beginTime5 = Double.parseDouble(bt5.getText().substring(0, 2) + ".5");
         } else {
             beginTime5 = Double.parseDouble(bt5.getText().substring(0, 2));
         }
 
+        Double beginTime6;
         if(bt6.getText().contains(":30")) {
             beginTime6 = Double.parseDouble(bt6.getText().substring(0, 2) + ".5");
         } else {
             beginTime6 = Double.parseDouble(bt6.getText().substring(0, 2));
         }
 
+        Double beginTime7;
         if(bt7.getText().contains(":30")) {
             beginTime7 = Double.parseDouble(bt7.getText().substring(0, 2) + ".5");
         } else {
@@ -239,42 +231,49 @@ public class AvailabilityController implements Initializable {
         }
 
         //End time
+        Double endTime1;
         if(et1.getText().contains(":30")) {
             endTime1 = Double.parseDouble(et1.getText().substring(0, 2) + ".5");
         } else {
             endTime1 = Double.parseDouble(et1.getText().substring(0, 2));
         }
 
+        Double endTime2;
         if(et2.getText().contains(":30")) {
             endTime2 = Double.parseDouble(et2.getText().substring(0, 2) + ".5");
         } else {
             endTime2 = Double.parseDouble(et2.getText().substring(0, 2));
         }
 
+        Double endTime3;
         if(et3.getText().contains(":30")) {
             endTime3 = Double.parseDouble(et3.getText().substring(0, 2) + ".5");
         } else {
             endTime3 = Double.parseDouble(et3.getText().substring(0, 2));
         }
 
+        Double endTime4;
         if(et4.getText().contains(":30")) {
             endTime4 = Double.parseDouble(et4.getText().substring(0, 2) + ".5");
         } else {
             endTime4 = Double.parseDouble(et4.getText().substring(0, 2));
         }
 
+        Double endTime5;
         if(et5.getText().contains(":30")) {
             endTime5 = Double.parseDouble(et5.getText().substring(0, 2) + ".5");
         } else {
             endTime5 = Double.parseDouble(et5.getText().substring(0, 2));
         }
 
+        Double endTime6;
         if(et6.getText().contains(":30")) {
             endTime6 = Double.parseDouble(et6.getText().substring(0, 2) + ".5");
         } else {
             endTime6 = Double.parseDouble(et6.getText().substring(0, 2));
         }
 
+        Double endTime7;
         if(et7.getText().contains(":30")) {
             endTime7 = Double.parseDouble(et7.getText().substring(0, 2) + ".5");
         } else {
@@ -284,13 +283,15 @@ public class AvailabilityController implements Initializable {
         ConnectionClass connectionclass = new ConnectionClass();
         Connection connection = connectionclass.getConnection();
 
-        String sql1 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate1 + "','" + beginTime1 + "','" + endTime1 + "')";
-        String sql2 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate2 + "','" + beginTime2 + "','" + endTime2 + "')";
-        String sql3 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate3 + "','" + beginTime3 + "','" + endTime3 + "')";
-        String sql4 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate4 + "','" + beginTime4 + "','" + endTime4 + "')";
-        String sql5 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate5 + "','" + beginTime5 + "','" + endTime5 + "')";
-        String sql6 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate6 + "','" + beginTime6 + "','" + endTime6 + "')";
-        String sql7 = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('" + activeUser.getEmail() + "','" + selectedDate7 + "','" + beginTime7 + "','" + endTime7 + "')";
+        String sqlInsert = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('";
+
+        String sql1 = sqlInsert + activeUser.getEmail() + "','" + selectedDate1 + "','" + beginTime1 + "','" + endTime1 + "')";
+        String sql2 = sqlInsert + activeUser.getEmail() + "','" + selectedDate2 + "','" + beginTime2 + "','" + endTime2 + "')";
+        String sql3 = sqlInsert + activeUser.getEmail() + "','" + selectedDate3 + "','" + beginTime3 + "','" + endTime3 + "')";
+        String sql4 = sqlInsert + activeUser.getEmail() + "','" + selectedDate4 + "','" + beginTime4 + "','" + endTime4 + "')";
+        String sql5 = sqlInsert + activeUser.getEmail() + "','" + selectedDate5 + "','" + beginTime5 + "','" + endTime5 + "')";
+        String sql6 = sqlInsert + activeUser.getEmail() + "','" + selectedDate6 + "','" + beginTime6 + "','" + endTime6 + "')";
+        String sql7 = sqlInsert + activeUser.getEmail() + "','" + selectedDate7 + "','" + beginTime7 + "','" + endTime7 + "')";
 
         try {
             Statement statement = connection.createStatement();
@@ -325,11 +326,12 @@ public class AvailabilityController implements Initializable {
         Statement statement = connection.createStatement();
         rst = statement.executeQuery(sql);
 
-        String finaldate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String finaldate = null;
 
         if(!rst.next()) {
             int i = 1;
             while (i < 4) {
+                finaldate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 if (i == 1) {
                     date1Check = finaldate;
                 } else if (i == 2) {

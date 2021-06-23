@@ -1,6 +1,8 @@
-package model;
+package company;
 
 import org.junit.jupiter.api.Test;
+import user.Availability;
+import user.Employee;
 
 import static org.junit.jupiter.api.Assertions.*;
 

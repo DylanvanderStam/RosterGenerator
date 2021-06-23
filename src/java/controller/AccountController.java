@@ -5,10 +5,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import model.Employee;
+import user.User;
+import notification.Notification;
+import notification.PasswordError;
+import notification.PasswordSucces;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,7 +21,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class AccountController {
-    private Employee activeUser;
+    private User activeUser;
 
     @FXML
     private AnchorPane rootPane;
@@ -48,18 +53,22 @@ public class AccountController {
     @FXML
     private Text breadCrumb;
 
-    public void initData(Employee user) {
+    @FXML
+    private Label notification;
+
+    public void initData(User user) {
         activeUser = user;
         activeUserText.setText("Change account details for " + activeUser.getName());
     }
 
     @FXML
     void save(ActionEvent event) throws IOException {
-
+        //To be implemented
     }
 
     @FXML
     void change(ActionEvent event) throws SQLException {
+        Notification not;
         if(checkPassword(passwordField.getText(), passwordField2.getText())) {
             ConnectionClass connectionclass = new ConnectionClass();
             Connection connection = connectionclass.getConnection();
@@ -68,6 +77,14 @@ public class AccountController {
 
             Statement statement = connection.createStatement();
             statement.execute(sql);
+
+            notification.setTextFill(Color.GREEN);
+            not = new PasswordSucces();
+            not.notification(notification);
+        } else {
+            notification.setTextFill(Color.RED);
+            not = new PasswordError();
+            not.notification(notification);
         }
     }
 

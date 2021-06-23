@@ -1,6 +1,6 @@
 package controller;
 
-import model.Employee;
+import user.Employee;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;

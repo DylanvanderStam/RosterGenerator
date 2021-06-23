@@ -1,6 +1,6 @@
 package controller;
 
-import model.Company;
+import company.Company;
 import org.junit.jupiter.api.Test;
 
 class LoginControllerTest {

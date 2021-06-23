@@ -1,4 +1,4 @@
-package model;
+package user;
 
 public class Availability {
     private String date;

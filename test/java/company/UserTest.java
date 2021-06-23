@@ -1,11 +1,13 @@
-package model;
+package company;
 
 import org.junit.jupiter.api.Test;
+import user.Employee;
+import user.User;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
-    User test = new User("Dylan", "van der Stam", "d.stam8@live.nl", "0683599294", "test");
+    User test = new Employee("Dylan", "van der Stam", "d.stam8@live.nl", "0683599294", "test");
 
     @Test
     void getFirstName() {

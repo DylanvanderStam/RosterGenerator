@@ -7,14 +7,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import model.Employee;
+import user.User;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
-    private Employee activeUser;
+    private User activeUser;
 
     @FXML
     private AnchorPane rootPane;
@@ -43,7 +43,7 @@ public class DashboardController implements Initializable {
     @FXML
     private AnchorPane pane;
 
-    public void initData(Employee user) {
+    public void initData(User user) {
         activeUser = user;
         activeUserLabel.setText("Welcome " + activeUser.getFirstName());
     }
@@ -76,7 +76,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     void generateRoster(ActionEvent event) {
-
+        //To be implemented
     }
 
     @FXML
@@ -87,7 +87,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     void setActiveUser() {
-
+        //To be implemented
     }
 
     @Override

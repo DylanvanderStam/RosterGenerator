@@ -1,6 +1,8 @@
-package model;
+package company;
 
 import connection.ConnectionClass;
+import user.Employee;
+import user.User;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,11 +12,11 @@ import java.util.ArrayList;
 
 public class Company {
     private String companyName;
-    private ArrayList<Employee> employees;
+    private ArrayList<User> users;
 
     public Company(String companyName) {
         this.companyName = companyName;
-        this.employees = new ArrayList<>();
+        this.users = new ArrayList<>();
 
         try {
             this.getData();
@@ -48,11 +50,11 @@ public class Company {
         rst = statement.executeQuery(sql);
 
         while(rst.next()) {
-            employees.add(new Employee(rst.getString(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5)));
+            users.add(new Employee(rst.getString(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5)));
         }
     }
 
-    public ArrayList<Employee> getEmployees() {
-        return employees;
+    public ArrayList<User> getEmployees() {
+        return users;
     }
 }
