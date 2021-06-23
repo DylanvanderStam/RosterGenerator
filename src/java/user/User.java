@@ -14,14 +14,16 @@ public class User {
     private String email;
     private String phoneNumber;
     private String password;
+    private Login login;
     private ArrayList<Availability> availability;
 
-    User(String firstName, String lastName, String email, String phoneNumber, String password) {
+    User(String firstName, String lastName, String email, String phoneNumber, String password) throws SQLException {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.login = Login.getInstance(email, password);
         availability = new ArrayList<>();
 
         try {
@@ -35,6 +37,10 @@ public class User {
         return this.firstName;
     }
 
+    public String getLastName() {
+        return this.lastName;
+    }
+
     public String getName() {
         return this.firstName + " " + this.lastName;
     }
@@ -43,12 +49,16 @@ public class User {
         return this.email;
     }
 
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
     public String getPassword() {
         return this.password;
     }
 
-    public void addAvailability(Availability availability) {
-        this.availability.add(availability);
+    public Login getLogin() {
+        return this.login;
     }
 
     public void getData() throws SQLException {
@@ -62,11 +72,16 @@ public class User {
         rst = statement.executeQuery(sql);
 
         while(rst.next()) {
-            addAvailability(new Availability(rst.getString(2), rst.getDouble(3), rst.getDouble(4)));
+            setAvailability(new Availability(rst.getString(2), rst.getDouble(3), rst.getDouble(4)));
         }
+    }
+
+    public void setAvailability(Availability availability) {
+        this.availability.add(availability);
     }
 
     public ArrayList<Availability> getAvailability() {
         return this.availability;
     }
+
 }

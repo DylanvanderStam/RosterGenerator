@@ -4,10 +4,15 @@ import org.junit.jupiter.api.Test;
 import user.Employee;
 import user.User;
 
+import java.sql.SQLException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
     User test = new Employee("Dylan", "van der Stam", "d.stam8@live.nl", "0683599294", "test");
+
+    UserTest() throws SQLException {
+    }
 
     @Test
     void getFirstName() {

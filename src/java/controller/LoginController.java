@@ -1,5 +1,6 @@
 package controller;
 
+import company.Company;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,20 +9,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import company.Company;
-import user.Login;
-import user.User;
 import notification.LoginError;
 import notification.LoginSucces;
 import notification.Notification;
+import user.Login;
+import user.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
-    ArrayList<User> employees;
+    ArrayList<User> users;
     private User activeUser;
 
     @FXML
@@ -40,13 +41,18 @@ public class LoginController implements Initializable {
     private Label notification;
 
     @FXML
-    void login(ActionEvent event) throws IOException {
-        Login login = Login.getInstance(email.getText(), password.getText(), employees);
-        if(login != null) {
+    void login(ActionEvent event) throws IOException, SQLException {
+        Login login = Login.getInstance(email.getText(), password.getText());
+        if (login != null) {
             Notification not = new LoginSucces();
-            not.notification(notification);
+            not.playNotification(notification);
 
-            activeUser = login.getActiveUser();
+            for(User temp : users) {
+                if(temp.getEmail().equals(email.getText()) && temp.getPassword().equals(password.getText())) {
+                    activeUser = temp;
+                }
+            }
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Dashboard.fxml"));
             AnchorPane root = loader.load();
 
@@ -56,13 +62,13 @@ public class LoginController implements Initializable {
             rootPane.getChildren().setAll(root);
         } else {
             Notification not = new LoginError();
-            not.notification(notification);
+            not.playNotification(notification);
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Company antes = new Company("Antes");
-        employees = antes.getEmployees();
+        users = antes.getUsers();
     }
 }

@@ -11,10 +11,6 @@ public class PasswordError extends Notification{
     }
 
     @Override
-    public void playSound() {
-    }
-
-    @Override
     public void playAnimation(Label label) {
         Duration duration = Duration.millis(2500);
         RotateTransition rotateTransition = new RotateTransition(duration, label);

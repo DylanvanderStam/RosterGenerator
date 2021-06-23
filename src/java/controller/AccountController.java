@@ -80,11 +80,11 @@ public class AccountController {
 
             notification.setTextFill(Color.GREEN);
             not = new PasswordSucces();
-            not.notification(notification);
+            not.playNotification(notification);
         } else {
             notification.setTextFill(Color.RED);
             not = new PasswordError();
-            not.notification(notification);
+            not.playNotification(notification);
         }
     }
 
