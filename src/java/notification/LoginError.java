@@ -9,12 +9,12 @@ import java.io.File;
 
 public class LoginError extends Notification{
     @Override
-    public String getNotification() {
+    protected String getNotification() {
         return "The provided credentials are not correct.";
     }
 
     @Override
-    public void playSound() {
+    protected void playSound() {
         try {
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(new File("src/resources/loginerror.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
@@ -26,6 +26,6 @@ public class LoginError extends Notification{
     }
 
     @Override
-    public void playAnimation(Label label) {
+    protected void playAnimation(Label label) {
     }
 }

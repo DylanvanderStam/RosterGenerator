@@ -14,9 +14,9 @@ public abstract class Notification {
         this.playAnimation(label);
     }
 
-    public abstract String getNotification();
+    protected abstract String getNotification();
 
-    public void playSound() {
+    protected void playSound() {
         try {
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(new File("src/resources/notification.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
@@ -27,5 +27,5 @@ public abstract class Notification {
         }
     }
 
-    public abstract void playAnimation(Label label);
+    protected abstract void playAnimation(Label label);
 }
