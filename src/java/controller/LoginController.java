@@ -42,8 +42,7 @@ public class LoginController implements Initializable {
 
     @FXML
     void login(ActionEvent event) throws IOException, SQLException {
-        Login login = Login.getInstance(email.getText(), password.getText());
-        if (login != null) {
+        if (Login.getInstance(email.getText(), password.getText()) != null) {
             Notification not = new LoginSucces();
             not.playNotification(notification);
 
