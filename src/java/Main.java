@@ -2,8 +2,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import util.Util;
 
 public class Main extends Application {
 
@@ -14,7 +14,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
-        stage.setScene(new Scene(root, Color.RED));
+        String style = "-fx-background-color: #" + Util.darkMode() + ";";
+        root.setStyle(style);
+
+        stage.setScene(new Scene(root));
         stage.setTitle("Roster Generator");
         stage.show();
     }

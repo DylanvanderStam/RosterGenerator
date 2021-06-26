@@ -1,8 +1,5 @@
 package util;
 
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -13,15 +10,15 @@ public class Util {
 
     }
 
-    public static Paint darkMode() {
+    public static String darkMode() {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         LocalTime time = LocalTime.parse(date);
         int seconds = time.toSecondOfDay();
 
         if(checkTime(seconds)){
-            return Color.GRAY;
+            return "a1a1a1";
         }
-        return Color.WHITE;
+        return "ffffff";
     }
 
     public static boolean checkTime(Integer time) {
