@@ -13,18 +13,18 @@ public class Util {
 
     }
 
-    public static Paint checkTime() {
+    public static Paint darkMode() {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         LocalTime time = LocalTime.parse(date);
         int seconds = time.toSecondOfDay();
 
-        if(darkMode(seconds)){
+        if(checkTime(seconds)){
             return Color.GRAY;
         }
         return Color.WHITE;
     }
 
-    public static boolean darkMode(Integer time) {
+    public static boolean checkTime(Integer time) {
         return time < 43200 || time > 86400;
     }
 

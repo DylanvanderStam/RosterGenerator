@@ -20,11 +20,11 @@ class UtilTest {
         Integer seconds5 = 43199;
         Integer seconds6 = 86401;
 
-        assertFalse(Util.darkMode(seconds1));
-        assertFalse(Util.darkMode(seconds2));
-        assertFalse(Util.darkMode(seconds3));
-        assertFalse(Util.darkMode(seconds4));
-        assertTrue(Util.darkMode(seconds5));
-        assertTrue(Util.darkMode(seconds6));
+        assertFalse(Util.checkTime(seconds1));
+        assertFalse(Util.checkTime(seconds2));
+        assertFalse(Util.checkTime(seconds3));
+        assertFalse(Util.checkTime(seconds4));
+        assertTrue(Util.checkTime(seconds5));
+        assertTrue(Util.checkTime(seconds6));
     }
 }

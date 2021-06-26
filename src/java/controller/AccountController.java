@@ -88,7 +88,6 @@ public class AccountController {
         return password1.matches(".*\\d.*") && !password1.contains(" ") && password1.equals(password2);
     }
 
-
     @FXML
     void back(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Dashboard.fxml"));
@@ -99,5 +98,4 @@ public class AccountController {
 
         rootPane.getChildren().setAll(root);
     }
-
 }
