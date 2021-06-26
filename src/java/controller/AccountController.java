@@ -10,13 +10,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import user.User;
 import notification.Notification;
 import notification.PasswordError;
 import notification.PasswordSucces;
+import user.User;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -70,12 +69,9 @@ public class AccountController {
     void change(ActionEvent event) throws SQLException {
         Notification not;
         if(checkPassword(passwordField.getText(), passwordField2.getText())) {
-            ConnectionClass connectionclass = new ConnectionClass();
-            Connection connection = connectionclass.getConnection();
-
             String sql = "UPDATE `employee` SET `password`= '" + passwordField.getText() + "' WHERE `email` = '" + activeUser.getEmail() + "'";
 
-            Statement statement = connection.createStatement();
+            Statement statement = ConnectionClass.getConnection().createStatement();
             statement.execute(sql);
 
             notification.setTextFill(Color.GREEN);

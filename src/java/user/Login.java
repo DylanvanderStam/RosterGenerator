@@ -2,7 +2,6 @@ package user;
 
 import connection.ConnectionClass;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,13 +14,10 @@ public class Login {
 
     public static Login getInstance(String username, String password) throws SQLException {
         if(single_instance == null) {
-            ConnectionClass connectionclass = new ConnectionClass();
-            Connection connection = connectionclass.getConnection();
-
             String sql = "SELECT * FROM `employee`";
             ResultSet rst;
 
-            Statement statement = connection.createStatement();
+            Statement statement = ConnectionClass.getConnection().createStatement();
             rst = statement.executeQuery(sql);
 
             while(rst.next()) {

@@ -1,6 +1,7 @@
 package controller;
 
 import company.Company;
+import connection.ConnectionClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +50,7 @@ public class LoginController implements Initializable {
             for(User temp : users) {
                 if(temp.getEmail().equals(email.getText()) && temp.getPassword().equals(password.getText())) {
                     activeUser = temp;
+                    ConnectionClass.getAvailabilityFromDatabase(activeUser);
                 }
             }
 
@@ -67,7 +69,11 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Company antes = new Company("Antes");
-        users = antes.getUsers();
+        try {
+            Company antes = new Company("Antes");
+            users = antes.getUsers();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

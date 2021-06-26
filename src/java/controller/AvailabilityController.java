@@ -12,15 +12,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import user.Employee;
 import user.User;
+import util.Util;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AvailabilityController implements Initializable {
@@ -134,13 +135,10 @@ public class AvailabilityController implements Initializable {
     void select(ActionEvent event) throws SQLException {
         LocalDate date = datePicker.getValue();
 
-        ConnectionClass connectionclass = new ConnectionClass();
-        Connection connection = connectionclass.getConnection();
-
         String sql = "SELECT `date` FROM `availability` WHERE `email` = '" + activeUser.getEmail() + "' AND  `date` = '" + date.format(DateTimeFormatter.ofPattern(dateFormat)) + "'";
         ResultSet rst;
 
-        Statement statement = connection.createStatement();
+        Statement statement = ConnectionClass.getConnection().createStatement();
         rst = statement.executeQuery(sql);
 
         if(!rst.next()) {
@@ -180,130 +178,44 @@ public class AvailabilityController implements Initializable {
     }
 
     @FXML
-    void save(ActionEvent event) throws IOException {
-        Double beginTime1;
-        if(bt1.getText().contains(":30")) {
-            beginTime1 = Double.parseDouble(bt1.getText().substring(0, 2) + ".5");
-        } else {
-            beginTime1 = Double.parseDouble(bt1.getText().substring(0, 2));
-        }
+    void save(ActionEvent event) throws IOException, SQLException {
+        ArrayList<String> beginButton = new ArrayList<>();
+        ArrayList<String> endButton = new ArrayList<>();
+        ArrayList<String> dates = new ArrayList<>();
 
-        Double beginTime2;
-        if(bt2.getText().contains(":30")) {
-            beginTime2 = Double.parseDouble(bt2.getText().substring(0, 2) + ".5");
-        } else {
-            beginTime2 = Double.parseDouble(bt2.getText().substring(0, 2));
-        }
+        dates.add(selectedDate1);
+        dates.add(selectedDate2);
+        dates.add(selectedDate3);
+        dates.add(selectedDate4);
+        dates.add(selectedDate5);
+        dates.add(selectedDate6);
+        dates.add(selectedDate7);
 
-        Double beginTime3;
-        if(bt3.getText().contains(":30")) {
-            beginTime3 = Double.parseDouble(bt3.getText().substring(0, 2) + ".5");
-        } else {
-            beginTime3 = Double.parseDouble(bt3.getText().substring(0, 2));
-        }
+        beginButton.add(bt1.getText());
+        beginButton.add(bt2.getText());
+        beginButton.add(bt3.getText());
+        beginButton.add(bt4.getText());
+        beginButton.add(bt5.getText());
+        beginButton.add(bt6.getText());
+        beginButton.add(bt7.getText());
 
-        Double beginTime4;
-        if(bt4.getText().contains(":30")) {
-            beginTime4 = Double.parseDouble(bt4.getText().substring(0, 2) + ".5");
-        } else {
-            beginTime4 = Double.parseDouble(bt4.getText().substring(0, 2));
-        }
+        endButton.add(et1.getText());
+        endButton.add(et2.getText());
+        endButton.add(et3.getText());
+        endButton.add(et4.getText());
+        endButton.add(et5.getText());
+        endButton.add(et6.getText());
+        endButton.add(et7.getText());
 
-        Double beginTime5;
-        if(bt5.getText().contains(":30")) {
-            beginTime5 = Double.parseDouble(bt5.getText().substring(0, 2) + ".5");
-        } else {
-            beginTime5 = Double.parseDouble(bt5.getText().substring(0, 2));
-        }
-
-        Double beginTime6;
-        if(bt6.getText().contains(":30")) {
-            beginTime6 = Double.parseDouble(bt6.getText().substring(0, 2) + ".5");
-        } else {
-            beginTime6 = Double.parseDouble(bt6.getText().substring(0, 2));
-        }
-
-        Double beginTime7;
-        if(bt7.getText().contains(":30")) {
-            beginTime7 = Double.parseDouble(bt7.getText().substring(0, 2) + ".5");
-        } else {
-            beginTime7 = Double.parseDouble(bt7.getText().substring(0, 2));
-        }
-
-        //End time
-        Double endTime1;
-        if(et1.getText().contains(":30")) {
-            endTime1 = Double.parseDouble(et1.getText().substring(0, 2) + ".5");
-        } else {
-            endTime1 = Double.parseDouble(et1.getText().substring(0, 2));
-        }
-
-        Double endTime2;
-        if(et2.getText().contains(":30")) {
-            endTime2 = Double.parseDouble(et2.getText().substring(0, 2) + ".5");
-        } else {
-            endTime2 = Double.parseDouble(et2.getText().substring(0, 2));
-        }
-
-        Double endTime3;
-        if(et3.getText().contains(":30")) {
-            endTime3 = Double.parseDouble(et3.getText().substring(0, 2) + ".5");
-        } else {
-            endTime3 = Double.parseDouble(et3.getText().substring(0, 2));
-        }
-
-        Double endTime4;
-        if(et4.getText().contains(":30")) {
-            endTime4 = Double.parseDouble(et4.getText().substring(0, 2) + ".5");
-        } else {
-            endTime4 = Double.parseDouble(et4.getText().substring(0, 2));
-        }
-
-        Double endTime5;
-        if(et5.getText().contains(":30")) {
-            endTime5 = Double.parseDouble(et5.getText().substring(0, 2) + ".5");
-        } else {
-            endTime5 = Double.parseDouble(et5.getText().substring(0, 2));
-        }
-
-        Double endTime6;
-        if(et6.getText().contains(":30")) {
-            endTime6 = Double.parseDouble(et6.getText().substring(0, 2) + ".5");
-        } else {
-            endTime6 = Double.parseDouble(et6.getText().substring(0, 2));
-        }
-
-        Double endTime7;
-        if(et7.getText().contains(":30")) {
-            endTime7 = Double.parseDouble(et7.getText().substring(0, 2) + ".5");
-        } else {
-            endTime7 = Double.parseDouble(et7.getText().substring(0, 2));
-        }
-
-        ConnectionClass connectionclass = new ConnectionClass();
-        Connection connection = connectionclass.getConnection();
-
+        Statement statement = ConnectionClass.getConnection().createStatement();
         String sqlInsert = "INSERT INTO `availability`(`email`, `date`, `beginTime`, `endTime`) VALUES ('";
 
-        String sql1 = sqlInsert + activeUser.getEmail() + "','" + selectedDate1 + "','" + beginTime1 + "','" + endTime1 + "')";
-        String sql2 = sqlInsert + activeUser.getEmail() + "','" + selectedDate2 + "','" + beginTime2 + "','" + endTime2 + "')";
-        String sql3 = sqlInsert + activeUser.getEmail() + "','" + selectedDate3 + "','" + beginTime3 + "','" + endTime3 + "')";
-        String sql4 = sqlInsert + activeUser.getEmail() + "','" + selectedDate4 + "','" + beginTime4 + "','" + endTime4 + "')";
-        String sql5 = sqlInsert + activeUser.getEmail() + "','" + selectedDate5 + "','" + beginTime5 + "','" + endTime5 + "')";
-        String sql6 = sqlInsert + activeUser.getEmail() + "','" + selectedDate6 + "','" + beginTime6 + "','" + endTime6 + "')";
-        String sql7 = sqlInsert + activeUser.getEmail() + "','" + selectedDate7 + "','" + beginTime7 + "','" + endTime7 + "')";
+        int i = 0;
 
-        try {
-            Statement statement = connection.createStatement();
-            statement.execute(sql1);
-            statement.execute(sql2);
-            statement.execute(sql3);
-            statement.execute(sql4);
-            statement.execute(sql5);
-            statement.execute(sql6);
-            statement.execute(sql7);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        for(String date : dates) {
+            String sql = sqlInsert + activeUser.getEmail() + "','" + date + "','" + Util.parseDouble(beginButton).get(i) + "','" + Util.parseDouble(endButton).get(i) + "')";
+            i++;
+            statement.execute(sql);
         }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Dashboard.fxml"));
@@ -317,13 +229,10 @@ public class AvailabilityController implements Initializable {
     }
 
     public static boolean checkAvailability(LocalDate date, Double beginTime, Double endTime, Boolean filledIN, Employee email) throws SQLException {
-        ConnectionClass connectionclass = new ConnectionClass();
-        Connection connection = connectionclass.getConnection();
-
         String sql = "SELECT `date` FROM `availability` WHERE `email` = '" + email.getEmail() + "' AND  `date` = '" + date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "'";
         ResultSet rst;
 
-        Statement statement = connection.createStatement();
+        Statement statement = ConnectionClass.getConnection().createStatement();
         rst = statement.executeQuery(sql);
 
         String finaldate = null;
@@ -343,7 +252,6 @@ public class AvailabilityController implements Initializable {
                 i++;
             }
         }
-
         return (date1Check.equals(finaldate) || date2Check.equals(finaldate) || date3Check.equals(finaldate))  && !filledIN && endTime - beginTime == 9.0;
     }
 
@@ -364,6 +272,12 @@ public class AvailabilityController implements Initializable {
     }
 
     public void hideFields() {
+        date2.setVisible(false);
+        date3.setVisible(false);
+        date4.setVisible(false);
+        date5.setVisible(false);
+        date6.setVisible(false);
+        date7.setVisible(false);
         bt1.setVisible(false);
         bt2.setVisible(false);
         bt3.setVisible(false);
@@ -381,6 +295,13 @@ public class AvailabilityController implements Initializable {
     }
 
     public void showFields() {
+        date1.setVisible(true);
+        date2.setVisible(true);
+        date3.setVisible(true);
+        date4.setVisible(true);
+        date5.setVisible(true);
+        date6.setVisible(true);
+        date7.setVisible(true);
         bt1.setVisible(true);
         bt2.setVisible(true);
         bt3.setVisible(true);

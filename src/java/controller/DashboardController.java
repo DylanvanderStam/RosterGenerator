@@ -83,6 +83,7 @@ public class DashboardController implements Initializable {
     void signOut(ActionEvent event) throws IOException {
         AnchorPane root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         rootPane.getChildren().setAll(root);
+        activeUser = null;
     }
 
     @FXML

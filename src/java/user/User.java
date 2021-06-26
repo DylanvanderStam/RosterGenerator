@@ -1,11 +1,6 @@
 package user;
 
-import connection.ConnectionClass;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class User {
@@ -25,12 +20,6 @@ public class User {
         this.password = password;
         this.login = Login.getInstance(email, password);
         availability = new ArrayList<>();
-
-        try {
-            getData();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 
     public String getFirstName() {
@@ -59,21 +48,6 @@ public class User {
 
     public Login getLogin() {
         return this.login;
-    }
-
-    public void getData() throws SQLException {
-        ConnectionClass connectionclass = new ConnectionClass();
-        Connection connection = connectionclass.getConnection();
-
-        String sql = "SELECT * FROM `availability` WHERE email = '" + this.getEmail() + "'";
-        ResultSet rst;
-
-        Statement statement = connection.createStatement();
-        rst = statement.executeQuery(sql);
-
-        while(rst.next()) {
-            setAvailability(new Availability(rst.getString(2), rst.getDouble(3), rst.getDouble(4)));
-        }
     }
 
     public void setAvailability(Availability availability) {

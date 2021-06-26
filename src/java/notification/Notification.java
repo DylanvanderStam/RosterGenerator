@@ -17,8 +17,12 @@ public abstract class Notification {
     protected abstract String getNotification();
 
     protected void playSound() {
+        playSound("src/resources/notification.wav");
+    }
+
+    protected void playSound(String path) {
         try {
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(new File("src/resources/notification.wav").getAbsoluteFile());
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInput);
             clip.start();
