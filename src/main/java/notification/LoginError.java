@@ -9,7 +9,7 @@ public class LoginError extends Notification{
     }
 
     protected void playSound() {
-        super.playSound("src/resources/loginerror.wav");
+        super.playSound("src/main/resources/loginerror.wav");
     }
 
     @Override

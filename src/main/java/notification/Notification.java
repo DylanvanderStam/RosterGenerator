@@ -17,7 +17,7 @@ public abstract class Notification {
     protected abstract String getNotification();
 
     protected void playSound() {
-        playSound("src/resources/notification.wav");
+        playSound("src/main/resources/notification.wav");
     }
 
     protected void playSound(String path) {

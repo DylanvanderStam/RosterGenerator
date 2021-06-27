@@ -9,7 +9,7 @@ public class LoginSucces extends Notification{
     }
 
     protected void playSound() {
-        super.playSound("src/resources/loginsucces.wav");
+        super.playSound("src/main/resources/loginsucces.wav");
     }
 
     @Override
