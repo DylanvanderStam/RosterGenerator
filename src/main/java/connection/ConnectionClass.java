@@ -1,8 +1,8 @@
-package connection;
+package main.java.connection;
 
-import user.Availability;
-import user.Employee;
-import user.User;
+import main.java.user.Availability;
+import main.java.user.Employee;
+import main.java.user.User;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,15 +1,15 @@
-package notification;
+package main.java.notification;
 
 import javafx.scene.control.Label;
 
-public class LoginSucces extends Notification{
+public class LoginSucces extends Notification {
     @Override
     protected String getNotification() {
         return null;
     }
 
     protected void playSound() {
-        super.playSound("src/main/resources/loginsucces.wav");
+        super.playSound("/sound/loginsucces.wav");
     }
 
     @Override

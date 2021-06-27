@@ -1,4 +1,4 @@
-package user;
+package main.java.user;
 
 import java.sql.SQLException;
 

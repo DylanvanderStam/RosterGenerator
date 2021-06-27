@@ -1,6 +1,5 @@
-package controller;
+package main.java.controller;
 
-import connection.ConnectionClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import notification.Notification;
-import notification.PasswordError;
-import notification.PasswordSucces;
-import user.User;
+import main.java.connection.ConnectionClass;
+import main.java.notification.Notification;
+import main.java.notification.PasswordError;
+import main.java.notification.PasswordSucces;
+import main.java.user.User;
 
 import java.io.IOException;
 import java.sql.SQLException;

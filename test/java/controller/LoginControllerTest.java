@@ -1,6 +1,6 @@
 package controller;
 
-import company.Company;
+import main.java.company.Company;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;

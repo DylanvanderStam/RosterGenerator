@@ -1,6 +1,6 @@
-package controller;
+package main.java.controller;
 
-import connection.ConnectionClass;
+import main.java.connection.ConnectionClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +10,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import user.Employee;
-import user.User;
+import main.java.user.Employee;
+import main.java.user.User;
 import util.Util;
 
 import java.io.IOException;

@@ -1,11 +1,11 @@
-package notification;
+package main.java.notification;
 
 import javafx.scene.control.Label;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.io.File;
+import java.net.URL;
 
 public abstract class Notification {
     public final void playNotification(Label label) {
@@ -17,12 +17,13 @@ public abstract class Notification {
     protected abstract String getNotification();
 
     protected void playSound() {
-        playSound("src/main/resources/notification.wav");
+        playSound("/sound/notification.wav");
     }
 
-    protected void playSound(String path) {
+    protected void playSound(String sound) {
+        URL defaultSound = getClass().getResource(sound);
         try {
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(defaultSound);
             Clip clip = AudioSystem.getClip();
             clip.open(audioInput);
             clip.start();

@@ -1,7 +1,7 @@
-package controller;
+package main.java.controller;
 
-import company.Company;
-import connection.ConnectionClass;
+import main.java.company.Company;
+import main.java.connection.ConnectionClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,11 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import notification.LoginError;
-import notification.LoginSucces;
-import notification.Notification;
-import user.Login;
-import user.User;
+import main.java.notification.LoginError;
+import main.java.notification.LoginSucces;
+import main.java.notification.Notification;
+import main.java.user.Login;
+import main.java.user.User;
 
 import java.io.IOException;
 import java.net.URL;

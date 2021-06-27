@@ -1,4 +1,4 @@
-package notification;
+package main.java.notification;
 
 import javafx.animation.RotateTransition;
 import javafx.scene.control.Label;

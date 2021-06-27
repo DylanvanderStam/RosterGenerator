@@ -1,7 +1,7 @@
-package company;
+package main.java.company;
 
-import connection.ConnectionClass;
-import user.User;
+import main.java.connection.ConnectionClass;
+import main.java.user.User;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package user;
+package main.java.user;
 
-import connection.ConnectionClass;
+import main.java.connection.ConnectionClass;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,8 +1,8 @@
 package company;
 
 import org.junit.jupiter.api.Test;
-import user.Employee;
-import user.User;
+import main.java.user.Employee;
+import main.java.user.User;
 
 import java.sql.SQLException;
 

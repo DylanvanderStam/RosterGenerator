@@ -1,4 +1,4 @@
-package controller;
+package main.java.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,7 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import user.User;
+import main.java.user.User;
 
 import java.io.IOException;
 import java.net.URL;
