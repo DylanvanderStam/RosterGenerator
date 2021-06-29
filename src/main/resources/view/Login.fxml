@@ -21,5 +21,6 @@
          </font>
       </Text>
       <Label fx:id="notification" alignment="CENTER" contentDisplay="CENTER" layoutX="193.0" layoutY="281.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="databasemessage" layoutX="235.0" layoutY="290.0" textFill="RED" />
    </children>
 </AnchorPane>

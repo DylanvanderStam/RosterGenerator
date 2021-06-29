@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import main.java.user.Employee;
 import main.java.user.User;
-import util.Util;
+import main.java.util.Util;
 
 import java.io.IOException;
 import java.net.URL;

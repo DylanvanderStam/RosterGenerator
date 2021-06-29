@@ -1,5 +1,6 @@
 package util;
 
+import main.java.util.Util;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,11 +22,11 @@ class UtilTest {
         Integer seconds5 = 43199;
         Integer seconds6 = 86401;
 
-        assertFalse(util.Util.checkTime(seconds1));
-        assertFalse(util.Util.checkTime(seconds2));
-        assertFalse(util.Util.checkTime(seconds3));
-        assertFalse(util.Util.checkTime(seconds4));
-        assertTrue(util.Util.checkTime(seconds5));
-        assertTrue(util.Util.checkTime(seconds6));
+        assertFalse(Util.checkTime(seconds1));
+        assertFalse(Util.checkTime(seconds2));
+        assertFalse(Util.checkTime(seconds3));
+        assertFalse(Util.checkTime(seconds4));
+        assertTrue(Util.checkTime(seconds5));
+        assertTrue(Util.checkTime(seconds6));
     }
 }

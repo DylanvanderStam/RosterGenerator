@@ -1,5 +1,6 @@
 package main.java.connection;
 
+import javafx.scene.control.Label;
 import main.java.user.Availability;
 import main.java.user.Employee;
 import main.java.user.User;
@@ -10,16 +11,21 @@ import java.util.ArrayList;
 public class ConnectionClass {
     private static Connection connection;
 
-    private ConnectionClass() throws SQLException {
+    private ConnectionClass(Label label) {
         String dbName = "rostergenerator";
         String userName = "admin";
         String password = "test";
 
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/" + dbName, userName, password);
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/" + dbName, userName, password);
+        } catch (Exception e) {
+            label.setText("No database connection");
+        }
+
     }
 
-    public static void createConnection() throws SQLException {
-        new ConnectionClass();
+    public static void createConnection(Label label) {
+        new ConnectionClass(label);
     }
 
     public static Connection getConnection() {

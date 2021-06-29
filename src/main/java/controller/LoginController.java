@@ -42,6 +42,9 @@ public class LoginController implements Initializable {
     private Label notification;
 
     @FXML
+    private Label databasemessage;
+
+    @FXML
     void login(ActionEvent event) throws IOException, SQLException {
         if (Login.getInstance(email.getText(), password.getText()) != null) {
             Notification not = new LoginSucces();
@@ -70,6 +73,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            ConnectionClass.createConnection(databasemessage);
             Company antes = new Company("Antes");
             users = antes.getUsers();
         } catch (Exception e) {

@@ -10,8 +10,7 @@ public class Company {
     private String companyName;
     private ArrayList<User> users;
 
-    public Company(String companyName) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        ConnectionClass.createConnection();
+    public Company(String companyName) throws SQLException {
         this.companyName = companyName;
         this.users = ConnectionClass.getUsersFromDatabase();
     }

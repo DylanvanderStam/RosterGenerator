@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import util.Util;
+import main.java.util.Util;
 
 public class GUIStarter extends Application {
     public static void main(String[] args) {
@@ -22,5 +22,4 @@ public class GUIStarter extends Application {
         stage.setTitle("Roster Generator");
         stage.show();
     }
-
 }
